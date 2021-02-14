@@ -2,16 +2,18 @@ package com.example.ProjectWithSpringGuru.model;
 
 import java.math.BigDecimal;
 
-public class Product {
+public class Product implements DomainObject{
     private Integer id;
     private String description;
     private String imgURL;
     private BigDecimal price;
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }

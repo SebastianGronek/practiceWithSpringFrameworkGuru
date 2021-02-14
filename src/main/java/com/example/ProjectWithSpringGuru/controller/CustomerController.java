@@ -9,15 +9,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 @Controller
 public class CustomerController {
-    @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
 
     @RequestMapping("/customers")
     public String getAllCustomers(Model model) {
-        model.addAttribute("customers", customerService.getListOfAllCustomers());
+        model.addAttribute("customers", customerService.listAll());
         return "customers";
     }
 
@@ -29,25 +34,25 @@ public class CustomerController {
 
     @GetMapping("/customer/{id}")
     public String getCustomerById(@PathVariable Integer id, Model model) {
-        model.addAttribute("customer", customerService.getCustomerById(id));
+        model.addAttribute("customer", customerService.getById(id));
         return "customer";
     }
 
     @RequestMapping("/customer/delete/{id}")
     public String deleteCustomer(@PathVariable Integer id) {
-        customerService.deleteCustomer(id);
+        customerService.delete(id);
         return "redirect:/customers";
     }
 
     @PostMapping("/customer")
     public String saveOrUpdateCustomer(Customer customer) {
-        Customer savedCustomer = customerService.saveOrUpdateCustomer(customer);
+        Customer savedCustomer = customerService.saveOrUpdate(customer);
         return "redirect:/customer/" + savedCustomer.getId();
     }
 
     @RequestMapping("/customer/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
-        model.addAttribute("customer", customerService.getCustomerById(id));
+        model.addAttribute("customer", customerService.getById(id));
         return "customerForm";
     }
 }
