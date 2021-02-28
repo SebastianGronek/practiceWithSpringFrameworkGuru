@@ -1,6 +1,5 @@
 package com.example.ProjectWithSpringGuru.controller;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;

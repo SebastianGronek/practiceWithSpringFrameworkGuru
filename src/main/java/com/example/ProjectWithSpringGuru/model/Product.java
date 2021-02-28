@@ -1,11 +1,17 @@
 package com.example.ProjectWithSpringGuru.model;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-public class Product implements DomainObject{
+@Entity
+public class Product implements DomainObject {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Version
+    private Integer version;
     private String description;
-    private String imgURL;
+    private String imgUrl;
     private BigDecimal price;
 
     @Override
@@ -18,6 +24,14 @@ public class Product implements DomainObject{
         this.id = id;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -26,12 +40,12 @@ public class Product implements DomainObject{
         this.description = description;
     }
 
-    public String getImgURL() {
-        return imgURL;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public BigDecimal getPrice() {
